@@ -20,8 +20,10 @@ $(document).ready ->
   lng_start = 0.1275 #parseFloat(map_index_map_lng_start)
 
   # Offset slightly and then pan to, to impress
-  window.map.setMaxBounds([[-86, -220], [86, 220]], {animate:false}).setView([lat_start-0.005, lng_start+0.03], 12)
+  window.map.setMaxBounds([[-86, -220], [86, 220]], {animate:false}).setView([lat_start-0.005, lng_start+0.03], 10)
   #window.map.panTo new L.LatLng(lat_start, lng_start)
+
+  omnivore.csv('/cities.csv').addTo(window.map);
 
   # ###### DRAW SELF MARKER
   # markerLayer_user = L.mapbox.markerLayer()
