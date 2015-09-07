@@ -3,7 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
+# Only markers in view
+#https://www.mapbox.com/mapbox.js/example/v1.0.0/listing-markers/
+# markers at certain zoom
+#https://www.mapbox.com/mapbox.js/example/v1.0.0/markers-only-at-zoom-level/
 
+#SOLUTION
+#https://www.mapbox.com/guides/an-open-platform/
 
 
 $(document).ready ->
@@ -23,7 +29,7 @@ $(document).ready ->
   window.map.setMaxBounds([[-86, -220], [86, 220]], {animate:false}).setView([lat_start-0.005, lng_start+0.03], 10)
   #window.map.panTo new L.LatLng(lat_start, lng_start)
 
-  omnivore.csv('/cities.csv').addTo(window.map);
+  # omnivore.csv('/cities.csv').addTo(window.map);
 
   # ###### DRAW SELF MARKER
   # markerLayer_user = L.mapbox.markerLayer()
