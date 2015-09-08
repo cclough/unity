@@ -18,16 +18,54 @@ $(document).ready ->
   # Provide your access token
   L.mapbox.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFuY2xvdWdoIiwiYSI6IkR6ZDZ1TFEifQ.i_3w7Q8o7bpB9YJhflFZ7g';
 
-  # Draw map
-  window.map = L.mapbox.map("main_index_map", "christianclough.ncei2jcg")
+  # # Draw map
+  # window.map = L.mapbox.map("main_index_map", "christianclough.ncei2jcg")
 
-  # Start at current_user, zoomed
-  lat_start = 51.5072
-  lng_start = 0.1275 #parseFloat(map_index_map_lng_start)
+  # # Start at current_user, zoomed
+  # lat_start = 51.5072
+  # lng_start = 0.1275 #parseFloat(map_index_map_lng_start)
 
-  # Offset slightly and then pan to, to impress
-  window.map.setMaxBounds([[-86, -220], [86, 220]], {animate:false}).setView([lat_start-0.005, lng_start+0.03], 10)
-  #window.map.panTo new L.LatLng(lat_start, lng_start)
+  # # Offset slightly and then pan to, to impress
+  # window.map.setMaxBounds([[-86, -220], [86, 220]], {animate:false}).setView([lat_start-0.005, lng_start+0.03], 10)
+  # #window.map.panTo new L.LatLng(lat_start, lng_start)
+
+
+  # # The visible tile layer
+  # L.mapbox.tileLayer('examples.map-8ced9urs').addTo map
+  # # Load interactivity data into the map with a gridLayer
+  # myGridLayer = L.mapbox.gridLayer('examples.map-8ced9urs').addTo(map)
+  # # And use that interactivity to drive a control the user can see.
+  # myGridControl = L.mapbox.gridControl(myGridLayer).addTo(map)
+  # # Finally, center the map.
+  # map.setView [
+  #   37
+  #   -80
+  # ], 3
+
+
+
+
+
+  mapid = 'christianclough.ncnchl83'
+
+
+  infoElm = document.querySelector('.building-info')
+  map = L.mapbox.map("main_index_map", mapid,
+    gridLayer: true
+    zoomControl: true).setView([
+    39.50
+    -98.35
+  ], 4)
+  map.attributionControl.addAttribution 'Source: GADM.org'
+  dataLayer = L.mapbox.gridLayer(mapid).addTo(map)
+  dataLayer.on 'mouseover', (evt) ->
+    if typeof evt.data == 'undefined'
+      return infoElm.innerHTML = ''
+    infoElm.innerHTML = 'name: ' + evt.data.NAME_1
+    return
+
+
+
 
   # omnivore.csv('/cities.csv').addTo(window.map);
 
