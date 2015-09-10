@@ -46,23 +46,68 @@ $(document).ready ->
 
 
 
-  mapid = 'christianclough.ncnchl83'
-
+  # mapid = 'christianclough.ndc36ib8'
+  # mapid = 'examples.map-8ced9urs'
 
   infoElm = document.querySelector('.building-info')
-  map = L.mapbox.map("main_index_map", mapid,
-    gridLayer: true
-    zoomControl: true).setView([
-    39.50
-    -98.35
-  ], 4)
-  map.attributionControl.addAttribution 'Source: GADM.org'
-  dataLayer = L.mapbox.gridLayer(mapid).addTo(map)
-  dataLayer.on 'mouseover', (evt) ->
-    if typeof evt.data == 'undefined'
-      return infoElm.innerHTML = ''
-    infoElm.innerHTML = 'name: ' + evt.data.NAME_1
+
+
+  # map = L.mapbox.map("main_index_map", mapid,
+  #   gridControl: false
+  #   gridLayer: true
+  #   zoomControl: true).setView([
+  #   39.50
+  #   -98.35
+  # ], 4)
+
+  map = L.mapbox.map('main_index_map', undefined, gridControl: true).setView([
+    40.85
+    -75.94
+  ], 3)
+
+
+  #gridLayer = L.mapbox.gridLayer('christianclough.ndc36ib8')
+  map.addLayer L.mapbox.tileLayer('christianclough.ndc36ib8')
+  #map.addLayer gridLayer
+
+  # #map.attributionControl.addAttribution 'Source: GADM.org'
+  # dataLayer = L.mapbox.gridLayer(mapid).addTo(map)
+
+  # Load interactivity data into the map with a gridLayer
+  myGridLayer = L.mapbox.gridLayer('christianclough.ndc36ib8').addTo(map)
+
+  # And use that interactivity to drive a control the user can see.
+  # myGridControl = L.mapbox.gridControl(myGridLayer).addTo(map);
+
+
+  # # EXPLORE THIS TOMORROW: https://www.mapbox.com/mapbox.js/example/v1.0.0/interactivity-outside-map-layer/
+  # map.gridLayer.on 'click', (e) ->
+  #   alert "hello"
+  #   # if e.data and e.data.url
+  #   #   window.open e.data.url
+  #   # return
+
+
+  myGridLayer.on('mousemove', (o) ->
+    if o.data and o.data.name
+      infoElm.innerHTML = '<strong>' + o.data.name + '</strong>'
+    else
+      infoElm.innerHTML = ''
     return
+  ).on 'mouseout', (o) ->
+    infoElm.innerHTML = ''
+    return
+
+
+  # dataLayer.on 'mouseover', (evt) ->
+  #   alert "hello"    
+  #   # if typeof evt.data == 'undefined'
+  #   #   return infoElm.innerHTML = ''
+  #   # infoElm.innerHTML = 'floors: 1'# + evt.data.floors
+
+
+
+  #GridControl = L.mapbox.gridControl(dataLayer).addTo(map)
 
 
 

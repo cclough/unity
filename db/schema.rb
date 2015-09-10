@@ -11,6 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20150910010833) do
+
+  create_table "places", :force => true do |t|
+    t.integer  "geo_id"
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
+    t.string   "continent"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
