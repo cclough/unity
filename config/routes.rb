@@ -45,7 +45,7 @@ Unity::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  resources :places, only: [:show]
   resources :main, only: [:index]
   
   # You can have the root of your site routed with "root"
